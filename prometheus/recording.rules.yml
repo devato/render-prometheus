@@ -1,0 +1,25 @@
+groups:
+  - name: total_calls
+    interval: 5s
+    rules:
+    - record: job:observe_periodic_counter:counter
+      expr: round(sum by (job) (increase(observe_periodic_counter_total[24h])))
+
+  - name: active_callers
+    interval: 5s
+    rules:
+    - record: job:active_callers:gauge
+      expr: sum by (job) (observe_periodic_gauge_value)
+
+  - name: avg_wait_time
+    interval: 5s
+    rules:
+    - record: job:avg_wait_time:gauge
+      expr: round(sum by (job)(rate(observe_periodic_distribution_duration_sum[5m])) / sum by (job)(rate(observe_periodic_distribution_duration_count[5m])))
+
+  - name: avg_tesla_duration
+    interval: 5s
+    rules:
+    - record: job:avg_tesla_duration:summary
+      expr: sum by (job)(rate(tesla_request_duration_sum[5m])) / sum by (job)(rate(tesla_request_duration_count[5m]))
+
