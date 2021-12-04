@@ -1,4 +1,4 @@
 FROM prom/prometheus:latest
 
-ADD ./prometheus/prometheus.yml /etc/prometheus/prometheus.yml
-ADD ./prometheus/recording.rules.yml /etc/prometheus/recording.rules.yml
+COPY prometheus/prometheus.yml /etc/prometheus/prometheus.yml
+COPY prometheus/recording.rules.yml /etc/prometheus/recording.rules.yml
