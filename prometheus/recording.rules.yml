@@ -26,6 +26,6 @@ groups:
   - name: total_tesla_requests
     interval: 5s
     rules:
-    - record: job:tesla_requests:counter
+    - record: job:total_tesla_requests:counter
       expr: round(sum by (job) (increase(tesla_request_duration_count[24h])))
 
