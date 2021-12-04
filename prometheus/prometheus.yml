@@ -12,7 +12,7 @@ scrape_configs:
     scrape_interval: 5s
     static_configs:
       - targets: ['observe-demo.onrender.com']
-        schema: https
+        scheme: https
         labels:
           service: 'observe-1'
       - targets: ['host.docker.internal:4001']
