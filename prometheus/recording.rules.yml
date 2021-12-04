@@ -14,6 +14,6 @@ groups:
     interval: 5s
     rules:
     - record: job:tesla_query_rate:avg
-      expr: avg(rate(tesla_request_duration_count[20s])) by (job)
+      expr: avg(rate(tesla_request_duration_count[25s])) by (job)
 
 
