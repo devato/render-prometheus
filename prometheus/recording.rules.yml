@@ -1,22 +1,4 @@
 groups:
-  # - name: total_calls
-  #   interval: 5s
-  #   rules:
-  #   - record: job:observe_periodic_counter:counter
-  #     expr: round(sum by (job) (increase(observe_periodic_counter_total[24h])))
-
-  # - name: active_callers
-  #   interval: 5s
-  #   rules:
-  #   - record: job:active_callers:gauge
-  #     expr: sum by (job) (observe_periodic_gauge_value)
-
-  # - name: avg_wait_time
-  #   interval: 5s
-  #   rules:
-  #   - record: job:avg_wait_time:gauge
-  #     expr: round(sum by (job)(rate(observe_periodic_distribution_duration_sum[5m])) / sum by (job)(rate(observe_periodic_distribution_duration_count[5m])))
-
   - name: avg_tesla_duration
     interval: 5s
     rules:
@@ -28,4 +10,10 @@ groups:
     rules:
     - record: job:total_tesla_requests:counter
       expr: round(sum by (job) (increase(tesla_request_duration_count[24h])))
+  - name: tesla_query_rate
+    interval: 5s
+    rules:
+    - record: job:tesla_query_rate:sum
+      expr: sum(rate(tesla_request_duration_count[20s])) by (job)
+
 
