@@ -13,7 +13,7 @@ groups:
   - name: tesla_query_rate
     interval: 5s
     rules:
-    - record: job:tesla_query_rate:sum
-      expr: sum(rate(tesla_request_duration_count[20s])) by (job)
+    - record: job:tesla_query_rate:avg
+      expr: avg(rate(tesla_request_duration_count[20s])) by (job) / 20
 
 
