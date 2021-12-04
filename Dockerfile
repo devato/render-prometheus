@@ -1,3 +1,4 @@
 FROM prom/prometheus:latest
 
-ADD ./prometheus /etc/prometheus
+ADD ./prometheus/prometheus.yml /etc/prometheus/prometheus.yml
+ADD ./prometheus/recording.rules.yml /etc/prometheus/recording.rules.yml
