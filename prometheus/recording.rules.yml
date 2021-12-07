@@ -13,4 +13,6 @@ groups:
         expr: round(sum by (job) (increase(tesla_request_duration_count[24h])))
       - record: job:tesla_query_rate:avg
         expr: avg(rate(tesla_request_duration_count[25s])) by (job)
+      - record: job:tesla_queries:total
+        expr: sum by (job)(tesla_request_duration_count)
 
