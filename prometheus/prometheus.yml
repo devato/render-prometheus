@@ -16,6 +16,10 @@ alerting:
 rule_files:
 - /etc/prometheus/rules/*.rules
 scrape_configs:
+- job_name: prometheus-demo-service
+  static_configs:
+  - targets:
+    - https://prometheus-demo-service.onrender.com:9090
 - job_name: prometheus
   honor_timestamps: true
   scrape_interval: 15s
