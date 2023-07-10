@@ -19,7 +19,7 @@ scrape_configs:
 - job_name: prometheus-demo-service
   static_configs:
   - targets:
-    - prometheus-demo-service.onrender.com:9090
+    - prometheus-demo-service.onrender.com
 - job_name: prometheus
   honor_timestamps: true
   scrape_interval: 15s
