@@ -1,13 +1,116 @@
 global:
-  scrape_interval:     15s
+  scrape_interval: 15s
+  scrape_timeout: 10s
   evaluation_interval: 15s
   external_labels:
-      monitor: '<monitor-name>'
-
-rule_files:
-  - 'recording.rules.yml'
-
-scrape_configs:
-  - job_name: <job-name>
+    environment: prometheus-demo
+alerting:
+  alertmanagers:
+  - follow_redirects: true
+    scheme: http
+    timeout: 10s
+    api_version: v2
     static_configs:
-      - targets: ['<target>']
+    - targets:
+      - demo.do.prometheus.io:9093
+rule_files:
+- /etc/prometheus/rules/*.rules
+scrape_configs:
+- job_name: prometheus-demo-service
+  static_configs:
+  - targets:
+    - prometheus-demo-service.onrender.com
+- job_name: prometheus
+  honor_timestamps: true
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  metrics_path: /metrics
+  scheme: http
+  follow_redirects: true
+  static_configs:
+  - targets:
+    - demo.do.prometheus.io:9090
+- job_name: random
+  honor_timestamps: true
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  metrics_path: /metrics
+  scheme: http
+  follow_redirects: true
+  file_sd_configs:
+  - files:
+    - /etc/prometheus/file_sd/random.yml
+    refresh_interval: 5m
+- job_name: caddy
+  honor_timestamps: true
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  metrics_path: /metrics
+  scheme: http
+  follow_redirects: true
+  static_configs:
+  - targets:
+    - localhost:2019
+- job_name: grafana
+  honor_timestamps: true
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  metrics_path: /metrics
+  scheme: http
+  follow_redirects: true
+  static_configs:
+  - targets:
+    - demo.do.prometheus.io:3000
+- job_name: node
+  honor_timestamps: true
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  metrics_path: /metrics
+  scheme: http
+  follow_redirects: true
+  file_sd_configs:
+  - files:
+    - /etc/prometheus/file_sd/node.yml
+    refresh_interval: 5m
+- job_name: alertmanager
+  honor_timestamps: true
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  metrics_path: /metrics
+  scheme: http
+  follow_redirects: true
+  file_sd_configs:
+  - files:
+    - /etc/prometheus/file_sd/alertmanager.yml
+    refresh_interval: 5m
+- job_name: blackbox
+  honor_timestamps: true
+  params:
+    module:
+    - http_2xx
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  metrics_path: /probe
+  scheme: http
+  follow_redirects: true
+  relabel_configs:
+  - source_labels: [__address__]
+    separator: ;
+    regex: (.*)
+    target_label: __param_target
+    replacement: $1
+    action: replace
+  - source_labels: [__param_target]
+    separator: ;
+    regex: (.*)
+    target_label: instance
+    replacement: $1
+    action: replace
+  - separator: ;
+    regex: (.*)
+    target_label: __address__
+    replacement: 127.0.0.1:9115
+    action: replace
+  static_configs:
+  - targets:
+    - http://localhost:9100
