@@ -6,3 +6,7 @@ scrape_configs:
   static_configs:
   - targets:
     - prometheus-e83j.onrender.com
+- job_name: demo
+  static_configs:
+  - targets:
+    - prometheus-demo-service.onrender.com
