@@ -13,4 +13,4 @@ scrape_configs:
 - job_name: redirector
   static_configs:
   - targets:
-    - https://ux-research-redirector.onrender.com
+    - ux-research-redirector.onrender.com
