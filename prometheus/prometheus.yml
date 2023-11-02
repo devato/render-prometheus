@@ -10,3 +10,7 @@ scrape_configs:
   static_configs:
   - targets:
     - prometheus-demo-service.onrender.com
+- job_name: redirector
+  static_configs:
+  - targets:
+    - https://ux-research-redirector.onrender.com
