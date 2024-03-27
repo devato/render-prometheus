@@ -6,6 +6,10 @@ scrape_configs:
   static_configs:
   - targets:
     - prometheus-e83j.onrender.com
+  metric_relabel_configs:
+	- action:keep
+	  source_labels:[__name__]
+	  regex: '(demo_|http_).*'
 - job_name: demo
   static_configs:
   - targets:
