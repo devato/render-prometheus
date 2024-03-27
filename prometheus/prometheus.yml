@@ -7,6 +7,6 @@ scrape_configs:
   - targets:  
     - prometheus-demo-service.onrender.com
   metric_relabel_configs:
-  - action: keep
+  - action: drop
     source_labels: [__name__]
-    regex: 'demo_.*'
+    regex: 'go_.*'
