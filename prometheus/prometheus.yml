@@ -2,11 +2,7 @@ global:
   scrape_interval: 5s
   evaluation_interval: 5s
 scrape_configs:
-- job_name: demo
+- job_name: prometheus
   static_configs:
   - targets:
-    - prometheus-demo-service.onrender.com
-  metric_relabel_configs:
-  - action: keep
-    source_labels: [__name__]
-    regex: '(demo_|http_).*'
+    - prometheus-e83j.onrender.com
