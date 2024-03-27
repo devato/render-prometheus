@@ -18,3 +18,8 @@ scrape_configs:
   static_configs:
   - targets:
     - ux-research-redirector.onrender.com
+remote_write:
+- url: https://prometheus-prod-13-prod-us-east-0.grafana.net/api/prom/push
+  basic_auth:
+    username: 1495985
+    password: SECRET
