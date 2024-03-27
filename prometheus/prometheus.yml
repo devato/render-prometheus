@@ -26,4 +26,4 @@ remote_write:
   write_relabel_configs: 
   - action: keep 
     source_labels: [__name__] 
-    regex: '(http_).*'  
+    regex: '(demo_).*'  
