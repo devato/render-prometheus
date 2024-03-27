@@ -30,7 +30,7 @@ remote_write:
 - url: https://prometheus-prod-13-prod-us-east-0.grafana.net/api/prom/push
   basic_auth:
     username: 1496441
-    password: "glc_eyJvIjoiNjk0NTU5IiwibiI6InJlbW90ZS13cml0ZS1mb3ItZGF0YS10cmFpbHMtc2hvcnQtdG9rZW4iLCJrIjoia0NoaTE3ZGZnOG0wZHo5ME5maDcyYTI1IiwibSI6eyJyIjoicHJvZC11cy1lYXN0LTAifX0="
+    password: "glc_eyJvIjoiNjk0NTU5IiwibiI6InJlbW90ZS13cml0ZS1kYXRhLXRyYWlscy10b2tlbjIiLCJrIjoiODJEZ0g2T2ZKODI1cVUxTmh6N2Q5OWZtIiwibSI6eyJyIjoicHJvZC11cy1lYXN0LTAifX0="
   write_relabel_configs: 
   - action: keep 
     source_labels: [__name__] 
